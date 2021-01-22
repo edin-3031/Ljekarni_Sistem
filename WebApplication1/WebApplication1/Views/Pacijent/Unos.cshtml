@@ -1,0 +1,120 @@
+﻿@{
+    List<Spol> spol = (List<Spol>)ViewData["spol"];
+}
+<style>
+    .err {
+        border: 3px solid red;
+        background-color: rgb(255, 122, 122);
+        box-shadow: 0px 0px 10px 2px red;
+    }
+</style>
+
+    <table>
+        <tr>
+            <td>
+                <label>Ime</label>
+            </td>
+            <td>
+                <input id="ime" type="text" name="ime" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Prezime</label>
+            </td>
+            <td>
+                <input id="prezime" type="text" name="prezime" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Datum rođenja</label>
+            </td>
+            <td>
+                <input id="datum" type="date" name="datum_rodjenja" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Spol</label>
+            </td>
+            <td>
+                <select id="spol" name="spol">
+                    <option value="0">---Odaberite---</option>
+                    <option disabled="disabled"></option>
+                    @foreach(var x in spol)
+                    {
+                        <option value="@x.SpolID">@x.Naziv</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Adresa</label>
+            </td>
+            <td>
+                <input id="adresa" type="text" name="adresa" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Broj telefona</label>
+            </td>
+            <td>
+                <input id="telefon" type="tel" name="telefon" />
+            </td>
+        </tr>
+    </table>
+    <button class="btn btn-primary" onclick="valid()">Snimi</button>
+    <script>
+        function valid() {
+            var ime = document.getElementById("ime").value;
+            var prezime = document.getElementById("prezime").value;
+            var datum = document.getElementById("datum").value;
+            var spol = document.getElementById("spol").value;
+            var adresa = document.getElementById("adresa").value;
+            var telefon = document.getElementById("telefon").value;
+
+            var prvi = drugi = treci = cetvrti = false;
+
+            if (ime == "" || ime == null) {
+                document.getElementById("ime").classList.add("err");
+                prvi = false;
+            }
+            else {
+                document.getElementById("ime").classList.remove("err");
+                prvi = true;
+            }
+
+            if (prezime == "" || prezime == null) {
+                document.getElementById("prezime").classList.add("err");
+                drugi = false;
+            }
+            else {
+                document.getElementById("prezime").classList.remove("err");
+                drugi = true;
+            }
+
+            if (datum == "" || datum == null) {
+                document.getElementById("datum").classList.add("err");
+                treci = false;
+            }
+            else {
+                document.getElementById("datum").classList.remove("err");
+                treci = true;
+            }
+
+            if (spol == 0) {
+                document.getElementById("spol").classList.add("err");
+                cetvrti = false;
+            }
+            else {
+                document.getElementById("spol").classList.remove("err");
+                cetvrti = true;
+            }
+            if (prvi && drugi && treci && cetvrti) {
+                window.location.href = "/Pacijent/UnosSnimi?ime=" + ime + "&&prezime=" + prezime +"&&datum_rodjenja="+datum+"&&spol="+spol+"&&adresa="+adresa+"&&telefon="+telefon;
+            }
+        }
+    </script>

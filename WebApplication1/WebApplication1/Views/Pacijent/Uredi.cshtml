@@ -1,0 +1,131 @@
+﻿@using WebApplication1.Models;
+@{
+    ViewData["Title"] = "Uredi";
+
+    Pacijent p = (Pacijent)ViewData["pacijent"];
+
+    List<Spol> spolovi = (List<Spol>)ViewData["spol"];
+}
+<style>
+    .err {
+        border: 3px solid red;
+        background-color: rgb(255, 122, 122);
+        box-shadow: 0px 0px 10px 2px red;
+    }
+</style>
+
+<h1>Uredi</h1>
+
+
+    <input id="id" name="id" hidden="hidden" value="@p.PacijentID" />
+
+    <table>
+        <tr>
+            <td>
+                <label>Ime</label>
+            </td>
+            <td>
+                <input id="ime" name="ime" type="text" value="@p.Ime" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Prezime</label>
+            </td>
+            <td>
+                <input id="prezime" name="prezime" type="text" value="@p.Prezime" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Datum rođenja</label>
+            </td>
+            <td>
+                <input id="datum_rodjenja" name="datum_rodjenja" type="datetime" value="@p.DatumRodjenja.Date" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Spol</label>
+            </td>
+            <td>
+                <select id="spol" name="spol">
+                    <option value="@p.spol.SpolID">@p.spol.Naziv</option>
+                    <option disabled="disabled"></option>
+                    @foreach (var x in spolovi)
+                    {
+                        <option value="@x.SpolID">@x.Naziv</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Adresa</label>
+            </td>
+            <td>
+                <input id="adresa" name="adresa" type="text" value="@p.Adresa" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Broj telefona</label>
+            </td>
+            <td>
+                <input id="telefon" type="tel" name="telefon" value="@p.BrojTelefona" />
+            </td>
+        </tr>
+    </table>
+    <button class="btn btn-primary" onclick="test()">Snimi</button>
+
+<script>
+    function test() {
+        var prvi = drugi = treci = cetvrti = false;
+
+        var id = document.getElementById("id").value;
+        var ime = document.getElementById("ime").value;
+        var prezime = document.getElementById("prezime").value;
+        var datum = document.getElementById("datum_rodjenja").value;
+        var spol = document.getElementById("spol").value;
+        var adresa = document.getElementById("adresa").value;
+        var telefon = document.getElementById("telefon").value;
+
+        if (ime == null || ime == "") {
+            document.getElementById("ime").classList.add("err");
+            prvi = false;
+        }
+        else {
+            document.getElementById("ime").classList.remove("err");
+            prvi = true;
+        }
+
+        if (prezime == null || prezime == "") {
+            document.getElementById("prezime").classList.add("err");
+            drugi = false;
+        }
+        else {
+            document.getElementById("prezime").classList.remove("err");
+            drugi = true
+        }
+
+        if (datum == null || datum == "") {
+            document.getElementById("datum_rodjenja").classList.add("err");
+            treci = false;
+        }
+        else {
+            document.getElementById("datum_rodjenja").classList.remove("err");
+            treci = true;
+        }
+        if (spol == 0) {
+            document.getElementById("spol").classList.add("err");
+            cetvrti = false;
+        }
+        else {
+            document.getElementById("spol").classList.remove("err");
+            cetvrti = true;
+        }
+        if (prvi && drugi && treci && cetvrti) {
+            window.location.href = "/Pacijent/UrediSnimi?id=" + id + "&&ime=" + ime + "&&prezime=" + prezime + "&&datum_rodjenja=" + datum + "&&spol=" + spol + "&&adresa=" + adresa + "&&telefon="+telefon;
+        }
+    }
+</script>

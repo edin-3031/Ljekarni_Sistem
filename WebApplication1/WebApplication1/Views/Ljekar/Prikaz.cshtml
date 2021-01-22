@@ -1,0 +1,29 @@
+﻿@using WebApplication1.Models;
+@{
+    ViewData["Title"] = "Prikaz";
+
+    List<Ljekar> ljekari = (List<Ljekar>)ViewData["ljekari"];
+}
+
+<a style="position:relative; left:45%;" class="btn btn-success" href="/Ljekar/Unos">Dodaj</a>
+<table class="table table-striped">
+    <thead>
+    <th>Ime i prezime</th>
+    <th>Titula</th>
+    <th>Šifra</th>
+    <th>Akcija</th>
+    </thead>
+    <tbody>
+        @foreach (var x in ljekari)
+        {
+            <tr>
+                <td>@(x.Ime+" "+x.Prezime)</td>
+                <td>@x.titula.Naziv</td>
+                <td>@x.Sifra</td>
+                <td>
+                    <a class="btn btn-primary" href="/Ljekar/Uredi?id=@x.LjekarID">Uredi</a><a class="btn btn-danger" href="/Ljekar/Ukloni?id=@x.LjekarID">Ukloni</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

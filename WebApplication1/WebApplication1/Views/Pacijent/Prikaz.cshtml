@@ -1,0 +1,45 @@
+﻿@using WebApplication1.Models;  
+@using WebApplication1.Models.VM;
+@model lista_PacijentPrikazVM;
+@{
+}
+<a style="position:relative; left:45%;" class="btn btn-success" href="/Pacijent/Unos">Dodaj</a>
+<table class="table table-striped">
+    <thead>
+        <th>Ime i prezime</th>
+        <th>Datum rođenja</th>
+        <th>Spol</th>
+        <th>Adresa</th>
+        <th>Broj telefona</th>
+        <th>Akcija</th>
+    </thead>
+    <tbody>
+        @foreach(var x in Model.lista)
+        {
+            <tr>
+                <td>@(x.Ime+" "+x.Prezime)</td>
+                <td>@(x.DatumRodjenja.Day+"."+ x.DatumRodjenja.Month + "." + x.DatumRodjenja.Year + ".")</td>
+                <td>@x.spol.Naziv</td>
+                @if (x.Adresa != null)
+                {
+                    <td>@x.Adresa</td>
+                }
+                @if (x.Adresa == null)
+                {
+                    <td>N/A</td>
+                }
+                @if (x.BrojTelefona != null)
+                {
+                    <td>@x.BrojTelefona</td>
+                }
+                @if (x.BrojTelefona == null)
+                {
+                    <td>N/A</td>
+                }
+                <td>
+                    <a class="btn btn-primary" href="/Pacijent/Uredi?id=@x.PacijentID">Uredi</a><a class="btn btn-danger" href="/Pacijent/Ukloni?id=@x.PacijentID">Ukloni</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
