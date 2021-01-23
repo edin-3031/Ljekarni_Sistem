@@ -8850,11 +8850,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Edin\\Desktop\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "D:\\Ljekarni_Sistem\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\Edin\\Desktop\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectPath": "D:\\Ljekarni_Sistem\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "packagesPath": "C:\\Users\\Edin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Edin\\Desktop\\WebApplication1\\WebApplication1\\obj\\",
+      "outputPath": "D:\\Ljekarni_Sistem\\WebApplication1\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

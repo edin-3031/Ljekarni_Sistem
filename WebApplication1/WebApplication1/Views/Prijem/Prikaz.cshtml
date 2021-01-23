@@ -1,0 +1,63 @@
+﻿@using WebApplication1.Models.VM;
+@model lista_prijemPrikazVM;
+@{
+}
+<style>
+    #box {
+        word-wrap: break-word;
+    }
+</style>
+<div id="primarno">
+    <a style="position:relative; left:45%;" class="btn btn-success" href="/Prijem/Unos">Dodaj</a>
+    <form action="/Prijem/Prikaz" method="post">
+        <div style="position:relative; left:27%; margin:3%;">
+            <input type="date" name="OD" id="OD" />
+            <input type="date" name="DO" id="DO" />
+            <button type="submit" class="btn btn-info">Traži</button>
+        </div>
+    </form>
+    <table class="table table-striped">
+        <thead>
+        <th>Ime i prezime pacijenta</th>
+        <th>Datum i vijeme prijema</th>
+        <th>Ime i prezime nadležnog ljekara</th>
+        <th>HITNO</th>
+        <th>Akcija</th>
+        <th>Detalji</th>
+        </thead>
+        <tbody>
+            @foreach (var x in Model.lista)
+            {
+                <tr>
+                    <td>@(x.pacijent.Ime+" "+x.pacijent.Prezime)</td>
+                    <td>@(x.Datum_Vrijeme.Day+"."+x.Datum_Vrijeme.Month + "."+x.Datum_Vrijeme.Year + " "+x.Datum_Vrijeme.Hour+" : "+ x.Datum_Vrijeme.Minute+" h")</td>
+                    <td>@(x.ljekar.Ime+" "+x.ljekar.Prezime+" - "+x.ljekar.Sifra)</td>
+                    @{
+                        if (x.Hitni_Prijem)
+                        {
+                            <td><b>DA</b></td>
+                        }
+                        else
+                        {
+                            <td>NE</td>
+                        }
+                    }
+                    <td>
+                        <a class="btn btn-primary" href="/Prijem/Izmijeni?id=@x.PrijemID">Izmijeni</a><a class="btn btn-danger" href="/Prijem/Otkazi?id=@x.PrijemID">Otkaži</a>
+                    </td>
+                    <td><a class="btn btn-warning" id="nalaz_@x.PrijemID">Nalaz</a></td>
+                    <script>
+                    $("#nalaz_@x.PrijemID").click(function () {
+                        $.get("/Nalaz/Prikaz?id=@x.PrijemID", function (event) {
+                            $("#box").html(event);
+                            $("#box").show();
+                            document.getElementById("box").style.border = "3px solid black";
+                        });
+                    });
+                    </script>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div id="box"></div>

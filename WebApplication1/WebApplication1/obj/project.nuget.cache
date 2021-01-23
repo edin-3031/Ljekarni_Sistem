@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fuOCXRnGUWGJYlBGUcfVhtU7VwUpoaMCanGocYkTAImLAoMjOTnx+F4gjlzCNMpUTcN6xJdHXxVUgQkHtkZnWw==",
+  "dgSpecHash": "C7Hw8jrvj/tEV9vb2oIgHix0aQyE3k7NUJtF/F0BUybtzbG0MBwWRqqZc9eY+ubmWpC+ko6bBBiLTm87e56Ilw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Edin\\Desktop\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+  "projectFilePath": "D:\\Ljekarni_Sistem\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Edin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.11\\microsoft.aspnetcore.cryptography.internal.3.1.11.nupkg.sha512",
     "C:\\Users\\Edin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.11\\microsoft.aspnetcore.cryptography.keyderivation.3.1.11.nupkg.sha512",

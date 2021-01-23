@@ -1,0 +1,93 @@
+﻿@model WebApplication1.Models.Prijem
+
+@{
+    ViewData["Title"] = "Izmijeni";
+
+    List<Pacijent> pacijenti = (List<Pacijent>)ViewData["pacijenti"];
+    List<Ljekar> ljekari = (List<Ljekar>)ViewData["ljekari"];
+    Prijem prijem = (Prijem)ViewData["prijem"];
+}
+<style>
+    .err {
+        border: 3px solid red;
+        background-color: rgb(255, 122, 122);
+        box-shadow: 0px 0px 10px 2px red;
+    }
+</style>
+<h1>Izmijeni</h1>
+
+<h4>Prijem</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="IzmijeniSnimi">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PrijemID" value="@prijem.PrijemID"/>
+            <div class="form-group">
+                <label asp-for="Datum_Vrijeme" class="control-label"></label>
+                <input onchange="enable()" id="datum" type="datetime" value="@prijem.Datum_Vrijeme" asp-for="Datum_Vrijeme" class="form-control" />
+                <span asp-validation-for="Datum_Vrijeme" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input onchange="enable()" id="hitno" class="form-check-input" checked="@prijem.Hitni_Prijem" asp-for="Hitni_Prijem" /> HITNI PRIJEM
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="pacijent_FK" class="control-label"></label>
+                <select onchange="enable()" id="pacijent" asp-for="pacijent_FK" class="form-control" asp-items="ViewBag.pacijent_FK">
+                    <option value="@prijem.pacijent.PacijentID">@(prijem.pacijent.Ime+" "+ prijem.pacijent.Prezime)</option>
+                    <option disabled="disabled"></option>
+                    @foreach(var x in pacijenti)
+                    {
+                        <option value="@x.PacijentID">@(x.Ime+" "+x.Prezime)</option>
+                    }
+                </select>
+                <span asp-validation-for="pacijent_FK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ljekar_FK" class="control-label"></label>
+                <select onchange="enable()" id="ljekar" asp-for="ljekar_FK" class="form-control" asp-items="ViewBag.ljekar_FK">
+                    <option value="@prijem.ljekar.LjekarID">@(prijem.ljekar.Ime+" "+ prijem.ljekar.Prezime)</option>
+                    <option disabled="disabled"></option>
+                    @foreach (var x in ljekari)
+                    {
+                        <option value="@x.LjekarID">@(x.Ime+" "+x.Prezime)</option>
+                    }
+                </select>
+                <span asp-validation-for="ljekar_FK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Snimi" onmouseover="check()" id="snimi" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function check() {
+        document.getElementById("snimi").disabled = true;
+
+        var datum = document.getElementById("datum").value;
+        var pacijent = document.getElementById("pacijent").value;
+        var ljekar = document.getElementById("ljekar").value;
+
+        var prvi = false;
+
+        if (datum == "" || datum == null) {
+            prvi = false;
+            document.getElementById("datum").classList.add("err");
+        }
+        else {
+            prvi = true;
+            document.getElementById("datum").classList.remove("err");
+        }
+
+        if (prvi) {
+            document.getElementById("snimi").disabled = false;
+        }
+    }
+
+    function enable() {
+        document.getElementById("snimi").disabled = false;
+    }
+</script>

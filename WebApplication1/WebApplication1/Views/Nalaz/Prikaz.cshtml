@@ -1,0 +1,15 @@
+﻿@using WebApplication1.Models.VM;
+@model NalazPrikazVM;   
+@{
+    Layout = null;
+}
+<h3>Nalaz pacijenta @Model.pacijent.Ime @Model.pacijent.Prezime</h3>
+<h4>Datum kreiranja: @(Model.datum_reiranja.Day+"."+ Model.datum_reiranja.Month + "." + Model.datum_reiranja.Year + " "+ Model.datum_reiranja.Hour + ":" +Model.datum_reiranja.Minute + " h")</h4>
+<button id="hide" style="position:relative; float:right;">Sakrij</button>
+<script>
+    $("#hide").click(function () {
+        $("#box").hide();
+    });
+</script>
+<hr />
+@Model.opis
