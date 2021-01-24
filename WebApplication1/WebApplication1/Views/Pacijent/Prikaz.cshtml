@@ -2,6 +2,7 @@
 @using WebApplication1.Models.VM;
 @model lista_PacijentPrikazVM;
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <a style="position:relative; left:45%;" class="btn btn-success" href="/Pacijent/Unos">Dodaj</a>
 <table class="table table-striped">
@@ -36,9 +37,20 @@
                 {
                     <td>N/A</td>
                 }
-                <td>
-                    <a class="btn btn-primary" href="/Pacijent/Uredi?id=@x.PacijentID">Uredi</a><a class="btn btn-danger" href="/Pacijent/Ukloni?id=@x.PacijentID">Ukloni</a>
-                </td>
+            <td>
+                <a class="btn btn-primary" href="/Pacijent/Uredi?id=@x.PacijentID">Uredi</a><a id="ukloni_@x.PacijentID" class="btn btn-danger" style="color:white;">Ukloni</a><span style="color:black; position:absolute;float:right;margin-left:1%;" id="poruka_@x.PacijentID">Sigurni? <a href="/Pacijent/Ukloni?id=@x.PacijentID" style="color:black; font-weight:bold;">Da</a> <a id="no_@x.PacijentID" style="color:black;cursor:pointer; font-weight:bold;">Ne</a></span>
+                <script>
+                            $("#poruka_@x.PacijentID").hide();
+
+                            $("#ukloni_@x.PacijentID").click(function () {
+                                $("#poruka_@x.PacijentID").slideDown();
+                            });
+
+                            $("#no_@x.PacijentID").click(function () {
+                                $("#poruka_@x.PacijentID").slideUp();
+                            });
+                </script>
+            </td>
             </tr>
         }
     </tbody>

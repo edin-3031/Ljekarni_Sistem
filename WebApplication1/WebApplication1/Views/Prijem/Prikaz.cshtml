@@ -6,9 +6,22 @@
     #box {
         word-wrap: break-word;
     }
+    #dodaj, #pdf{
+        position:relative;
+        display:inline-block;
+    }
+    #dodaj{
+        left:45%;
+    }
+    #pdf{
+        float:right;
+    }
 </style>
 <div id="primarno">
-    <a style="position:relative; left:45%;" class="btn btn-success" href="/Prijem/Unos">Dodaj</a>
+    <div id="dugmad">
+        <a id="dodaj" class="btn btn-success" href="/Prijem/Unos">Dodaj</a>
+        <a id="pdf" class="btn btn-info" href="/Prijem/ExportPdf">Preuzmi PDF</a>
+    </div>
     <form action="/Prijem/Prikaz" method="post">
         <div style="position:relative; left:27%; margin:3%;">
             <input type="date" name="OD" id="OD" />
@@ -22,8 +35,8 @@
         <th>Datum i vijeme prijema</th>
         <th>Ime i prezime nadležnog ljekara</th>
         <th>HITNO</th>
-        <th>Akcija</th>
         <th>Detalji</th>
+        <th>Akcija</th>
         </thead>
         <tbody>
             @foreach (var x in Model.lista)
@@ -43,17 +56,32 @@
                         }
                     }
                     <td>
-                        <a class="btn btn-primary" href="/Prijem/Izmijeni?id=@x.PrijemID">Izmijeni</a><a class="btn btn-danger" href="/Prijem/Otkazi?id=@x.PrijemID">Otkaži</a>
+                        <a class="btn btn-warning" id="nalaz_@x.PrijemID">Nalaz</a>
                     </td>
-                    <td><a class="btn btn-warning" id="nalaz_@x.PrijemID">Nalaz</a></td>
+                    <td>
+                        <a class="btn btn-primary" href="/Prijem/Izmijeni?id=@x.PrijemID">Izmijeni</a><a class="btn btn-danger" style="color:white;" id="ukloni_@x.PrijemID">Otkaži</a>
+                        <span style="color:black; position:absolute;float:right;margin-left:1%;" id="poruka_@x.PrijemID">Sigurni? <a href="/Prijem/Otkazi?id=@x.PrijemID" style="color:black; font-weight:bold;">Da</a> <a id="no_@x.PrijemID" style="color:black;cursor:pointer; font-weight:bold;">Ne</a></span>
+                    </td>
                     <script>
-                    $("#nalaz_@x.PrijemID").click(function () {
-                        $.get("/Nalaz/Prikaz?id=@x.PrijemID", function (event) {
-                            $("#box").html(event);
-                            $("#box").show();
-                            document.getElementById("box").style.border = "3px solid black";
+                        $("#nalaz_@x.PrijemID").click(function () {
+                            $.get("/Nalaz/Prikaz?id=@x.PrijemID", function (event) {
+                                $("#box").html(event);
+                                $("#box").show();
+                                document.getElementById("box").style.border = "3px solid black";
+                            });
                         });
-                    });
+
+                         $("#poruka_@x.PrijemID").hide();
+
+                            $("#ukloni_@x.PrijemID").click(function () {
+
+                                $("#poruka_@x.PrijemID").slideDown();
+                            });
+
+                            $("#no_@x.PrijemID").click(function () {
+                                $("#poruka_@x.PrijemID").slideUp();
+                            });
+
                     </script>
                 </tr>
             }

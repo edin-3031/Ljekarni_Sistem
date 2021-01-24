@@ -5,7 +5,12 @@
     Layout = null;
     Prijem p = (Prijem)ViewData["prijem"];
 }
-
+<button id="hide" style="position:relative; float:right;">Sakrij</button>
+<script>
+    $("#hide").click(function () {
+        $("#box").hide();
+    });
+</script>
 <h1>Unos</h1>
 
 <h4>Nalaz za pacijenta @(p.pacijent.Ime+" "+p.pacijent.Prezime)</h4>

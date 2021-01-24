@@ -31,7 +31,8 @@ namespace WebApplication1.Controllers
               datum_reiranja=x.Datum_Vrijeme_Kreiranja,
               opis=x.Opis,
               pacijent=x.prijem.pacijent,
-              prijem=x.prijem
+              prijem=x.prijem,
+              nalazId=x.NalazID
             }).FirstOrDefault();
 
             return View(model);
@@ -61,6 +62,36 @@ namespace WebApplication1.Controllers
 
             db.SaveChanges();
 
+            return Redirect("/Prijem/Prikaz");
+        }
+
+        public IActionResult Izmijeni(int id)
+        {
+            ViewData["nalaz"] = db.Nalaz.Where(a => a.NalazID == id).FirstOrDefault();
+
+            return View();
+        }
+
+        public IActionResult IzmijeniSnimi(Nalaz t)
+        {
+            Nalaz temp = db.Nalaz.Where(a => a.NalazID == t.NalazID).FirstOrDefault();
+
+            temp.Datum_Vrijeme_Kreiranja = DateTime.Now;
+            temp.Opis = t.Opis;
+            db.SaveChanges();
+
+            return Redirect("/Prijem/Prikaz");
+        }
+
+        public IActionResult Ukloni(int id)
+        {
+            Nalaz temp = db.Nalaz.Where(a=>a.NalazID==id).FirstOrDefault();
+
+            if (temp != null)
+            {
+                db.Remove(temp);
+                db.SaveChanges();
+            }
             return Redirect("/Prijem/Prikaz");
         }
     }

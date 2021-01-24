@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 using WebApplication1.Data;
 using WebApplication1.Models;
 using WebApplication1.Models.VM;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Drawing;
+using System.IO;
+using Rotativa.AspNetCore;
 
 namespace WebApplication1.Controllers
 {
@@ -97,6 +102,13 @@ namespace WebApplication1.Controllers
 
             if (temp != null)
             {
+                Nalaz n = db.Nalaz.Where(a => a.prijem_FK == temp.PrijemID).FirstOrDefault();
+                if (n != null)
+                {
+                    db.Remove(n);
+                    db.SaveChanges();
+                }
+
                 db.Remove(temp);
                 db.SaveChanges();
             }
@@ -133,6 +145,74 @@ namespace WebApplication1.Controllers
             db.SaveChanges();
 
             return Redirect("/Prijem/Prikaz");
+        }
+
+        public IActionResult ExportPdf()
+        {
+            List<Nalaz> nalazi = db.Nalaz.ToList();
+            List<Prijem> prijemi= db.Prijem.Include(a=>a.pacijent).Include(a=>a.ljekar).Select(x=>new Prijem { 
+                Datum_Vrijeme=x.Datum_Vrijeme,
+                ljekar=x.ljekar,
+                Hitni_Prijem=x.Hitni_Prijem,
+                pacijent=x.pacijent,
+                PrijemID=x.PrijemID
+            }).ToList();
+
+            List<pdfVM> lista_1 = new List<pdfVM>();
+
+            foreach(var x in prijemi) { 
+                lista_1.Add(new pdfVM
+                {
+                    datumPrijema = x.Datum_Vrijeme,
+                    hitno = x.Hitni_Prijem,
+                    prijemId = x.PrijemID,
+                    ljekar = x.ljekar.Ime + " " + x.ljekar.Prezime,
+                    pacijent = x.pacijent.Ime + " " + x.pacijent.Prezime
+                });
+            }
+            List<pdfVM> lista_final = new List<pdfVM>();
+
+            bool upisan = false;
+
+            foreach(var m in lista_1)
+            {
+                upisan = false;
+                foreach(var n in nalazi)
+                {
+                    if (m.prijemId == n.prijem_FK)
+                    {
+                        lista_final.Add(new pdfVM
+                        {
+                            datumPrijema = m.datumPrijema,
+                            hitno = m.hitno,
+                            prijemId = m.prijemId,
+                            ljekar = m.ljekar,
+                            pacijent = m.pacijent,
+                            datumNalaza=n.Datum_Vrijeme_Kreiranja,
+                            opis=n.Opis
+                        });
+                        upisan = true;
+                    }
+                }
+                if(!upisan)
+                {
+                    lista_final.Add(new pdfVM
+                    {
+                        datumPrijema = m.datumPrijema,
+                        hitno = m.hitno,
+                        prijemId = m.prijemId,
+                        ljekar = m.ljekar,
+                        pacijent = m.pacijent,
+                    });
+                }
+            }
+
+            lista_pdfVM model = new lista_pdfVM
+            {
+                lista = lista_final
+            };
+
+            return new ViewAsPdf(model);
         }
     }
 }

@@ -1,15 +1,32 @@
 ﻿@using WebApplication1.Models.VM;
-@model NalazPrikazVM;   
+@model NalazPrikazVM;
 @{
     Layout = null;
 }
+<button id="delete" style="position:relative; float:right;">Ukloni</button>
+<button id="hide" style="position:relative; float:right;">Sakrij</button>
 <h3>Nalaz pacijenta @Model.pacijent.Ime @Model.pacijent.Prezime</h3>
 <h4>Datum kreiranja: @(Model.datum_reiranja.Day+"."+ Model.datum_reiranja.Month + "." + Model.datum_reiranja.Year + " "+ Model.datum_reiranja.Hour + ":" +Model.datum_reiranja.Minute + " h")</h4>
-<button id="hide" style="position:relative; float:right;">Sakrij</button>
+<button id="edit" style="position:relative; float:right;">Izmijeni</button>
+<hr />
+@Model.opis
+
 <script>
     $("#hide").click(function () {
         $("#box").hide();
     });
+
+    $("#edit").click(function () {
+        $.get("/Nalaz/Izmijeni?id=@Model.nalazId", function (event) {
+            $("#box").html(event);
+        });
+    });
+
+    $("#delete").click(function () {
+        $.get("/Nalaz/Ukloni?id=@Model.nalazId", function (event) {
+             $.get("/Nalaz/Unos?id=@Model.prijem.PrijemID", function (event_final) {
+                 $("#box").html(event_final);
+            });
+        });
+    });
 </script>
-<hr />
-@Model.opis

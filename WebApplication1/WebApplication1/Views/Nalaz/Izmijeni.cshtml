@@ -1,0 +1,27 @@
+﻿@model WebApplication1.Models.Nalaz
+@{ 
+    Nalaz nalaz = (Nalaz)ViewData["nalaz"];
+    Layout = null;
+}
+<style>
+    #opis {
+        position:relative;
+        width:100%;
+    }
+</style>
+<h4>Nalaz</h4>
+<hr />
+ 
+<form id="forma" action="/Nalaz/IzmijeniSnimi">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input name="nalazId" type="hidden" asp-for="NalazID" value="@nalaz.NalazID" />
+    <div class="form-group">
+        <label asp-for="Opis" class="control-label"></label>
+        <input name="opis" id="opis" class="flex-fill" asp-for="Opis" value="@nalaz.Opis"/>
+        <span asp-validation-for="Opis" class="text-danger"></span>
+    </div>
+        <input name="prijem_fk" type="hidden" asp-for="prijem_FK" value="@nalaz.prijem_FK" />
+        <div class="form-group">
+            <button id="spasi" type="submit" class="btn btn-primary">Snimi</button>
+        </div>
+</form>

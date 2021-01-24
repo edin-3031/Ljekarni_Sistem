@@ -21,7 +21,18 @@
                 <td>@x.titula.Naziv</td>
                 <td>@x.Sifra</td>
                 <td>
-                    <a class="btn btn-primary" href="/Ljekar/Uredi?id=@x.LjekarID">Uredi</a><a class="btn btn-danger" href="/Ljekar/Ukloni?id=@x.LjekarID">Ukloni</a>
+                    <a class="btn btn-primary" href="/Ljekar/Uredi?id=@x.LjekarID">Uredi</a><a class="btn btn-danger" style="color:white;" id="ukloni_@x.LjekarID">Ukloni</a><span style="color:black; position:absolute;float:right;margin-left:1%;" id="poruka_@x.LjekarID">Sigurni? <a href="/Ljekar/Ukloni?id=@x.LjekarID" style="color:black; font-weight:bold;">Da</a> <a id="no_@x.LjekarID" style="color:black;cursor:pointer; font-weight:bold;">Ne</a></span>
+                    <script>
+                            $("#poruka_@x.LjekarID").hide();
+
+                            $("#ukloni_@x.LjekarID").click(function () {
+                                $("#poruka_@x.LjekarID").slideDown();
+                            });
+
+                            $("#no_@x.LjekarID").click(function () {
+                                $("#poruka_@x.LjekarID").slideUp();
+                            });
+                    </script>
                 </td>
             </tr>
         }
