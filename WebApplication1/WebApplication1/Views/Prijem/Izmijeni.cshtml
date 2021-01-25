@@ -28,7 +28,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="pacijent_FK" class="control-label"></label>
+                <label asp-for="pacijent_FK" class="control-label">Pacijent</label>
                 <select onchange="enable()" id="pacijent" asp-for="pacijent_FK" class="form-control" asp-items="ViewBag.pacijent_FK">
                     <option value="@prijem.pacijent.PacijentID">@(prijem.pacijent.Ime+" "+ prijem.pacijent.Prezime)</option>
                     <option disabled="disabled"></option>
@@ -40,7 +40,7 @@
                 <span asp-validation-for="pacijent_FK" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ljekar_FK" class="control-label"></label>
+                <label asp-for="ljekar_FK" class="control-label">Ljekar</label>
                 <select onchange="enable()" id="ljekar" asp-for="ljekar_FK" class="form-control" asp-items="ViewBag.ljekar_FK">
                     <option value="@prijem.ljekar.LjekarID">@(prijem.ljekar.Ime+" "+ prijem.ljekar.Prezime)</option>
                     <option disabled="disabled"></option>
