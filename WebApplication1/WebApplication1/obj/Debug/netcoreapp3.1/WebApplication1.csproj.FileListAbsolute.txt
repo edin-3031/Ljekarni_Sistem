@@ -353,4 +353,4 @@ D:\Ljekarni_Sistem\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\Micro
 D:\Ljekarni_Sistem\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
 D:\Ljekarni_Sistem\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\Ljekarni_Sistem\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\Rotativa.AspNetCore.dll
-D:\Ljekarni_Sistem\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Prijem\ExportPdf.cshtml.g.cs
+D:\Ljekarni_Sistem\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Prijem\Prijemi_PDF.cshtml.g.cs

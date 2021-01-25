@@ -25,17 +25,17 @@
             <div class="form-group">
                 <label asp-for="Ime" class="control-label"></label>
                 <input onkeydown="enable()" id="ime" asp-for="Ime" class="form-control" value="@ljekar.Ime"/>
-                <span asp-validation-for="Ime" class="text-danger"></span>
+                <span id="span_ime" asp-validation-for="Ime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Prezime" class="control-label"></label>
                 <input onkeydown="enable()" id="prezime" asp-for="Prezime" class="form-control" value="@ljekar.Prezime"/>
-                <span asp-validation-for="Prezime" class="text-danger"></span>
+                <span id="span_prezime" asp-validation-for="Prezime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Sifra" class="control-label"></label>
                 <input onkeydown="enable()" id="sifra" asp-for="Sifra" class="form-control" value="@ljekar.Sifra"/>
-                <span asp-validation-for="Sifra" class="text-danger"></span>
+                <span id="span_sifra" asp-validation-for="Sifra" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="titula_FK" class="control-label"></label>
@@ -72,26 +72,33 @@
         if (ime != "" && ime != null) {
             prvi = true;
             document.getElementById("ime").classList.remove("err");
+            document.getElementById("span_ime").innerText = "";
         }
         else {
             prvi = false;
             document.getElementById("ime").classList.add("err");
+            document.getElementById("span_ime").innerText = "Obavezno polje";
         }
         if (prezime != "" && prezime != null) {
             drugi = true;
             document.getElementById("prezime").classList.remove("err");
+            document.getElementById("span_prezime").innerText = "";
         }
         else {
             drugi = false;
             document.getElementById("prezime").classList.add("err");
+            document.getElementById("span_prezime").innerText = "Obavezno polje";
+
         }
         if (sifra != "" && sifra != null) {
             treci = true;
             document.getElementById("sifra").classList.remove("err");
+            document.getElementById("span_sifra").innerText = "";
         }
         else {
             document.getElementById("sifra").classList.add("err");
             treci = false;
+            document.getElementById("span_sifra").innerText = "Obavezno polje";
         }
         if (titula!=0) {
             cetvrti = true;

@@ -147,7 +147,7 @@ namespace WebApplication1.Controllers
             return Redirect("/Prijem/Prikaz");
         }
 
-        public IActionResult ExportPdf()
+        public IActionResult Prijemi_PDF()
         {
             List<Nalaz> nalazi = db.Nalaz.ToList();
             List<Prijem> prijemi= db.Prijem.Include(a=>a.pacijent).Include(a=>a.ljekar).Select(x=>new Prijem { 

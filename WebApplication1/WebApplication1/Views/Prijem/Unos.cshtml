@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label asp-for="Datum_Vrijeme" class="control-label"></label>
                 <input onchange="enable()" id="datum" asp-for="Datum_Vrijeme" class="form-control" />
-                <span asp-validation-for="Datum_Vrijeme" class="text-danger"></span>
+                <span id="span_datum" asp-validation-for="Datum_Vrijeme" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -37,11 +37,12 @@
                 <select onchange="enable()" id="pacijent" asp-for="pacijent_FK" class="form-control" asp-items="ViewBag.pacijent_FK">
                     <option value="0">---Odabrite---</option>
                     <option disabled="disabled"></option>
-                    @foreach(var x in pacijenti)
+                    @foreach (var x in pacijenti)
                     {
                         <option value="@x.PacijentID">@(x.Ime+" "+x.Prezime)</option>
                     }
                 </select>
+                <span id="span_pacijent" asp-validation-for="pacijent_FK" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ljekar_FK" class="control-label"></label>
@@ -53,6 +54,7 @@
                         <option value="@x.LjekarID">@(x.titula.Naziv+" "+x.Ime+" "+x.Prezime)</option>
                     }
                 </select>
+                <span id="span_ljekar" asp-validation-for="ljekar_FK" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" onmouseover="check()" id="snimi" value="Snimi" class="btn btn-primary" />
@@ -109,29 +111,35 @@
             if (!checkDate(datum)) {
                 prvi = false;
                 document.getElementById("datum").classList.add("err");
+                document.getElementById("span_datum").innerText="Datum i vrijeme može biti trenutno ili starije od trenutnog";
             }
             else {
                 prvi = true;
                 document.getElementById("datum").classList.remove("err");
+                document.getElementById("span_datum").innerText = "";
             }
         }
 
         if (pacijent == 0) {
             drugi = false;
             document.getElementById("pacijent").classList.add("err");
+            document.getElementById("span_pacijent").innerText = "Obavezno polje";
         }
         else {
             drugi = true;
             document.getElementById("pacijent").classList.remove("err");
+            document.getElementById("span_pacijent").innerText = "";
         }
 
         if (ljekar == 0) {
             treci = false;
             document.getElementById("ljekar").classList.add("err");
+            document.getElementById("span_ljekar").innerText = "Obavezno polje";
         }
         else {
             treci = true;
             document.getElementById("ljekar").classList.remove("err");
+            document.getElementById("span_ljekar").innerText = "";
         }
         if (prvi && drugi && treci) {
             document.getElementById("snimi").disabled = false;
