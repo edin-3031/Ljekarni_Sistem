@@ -6,13 +6,8 @@
 
     List<Spol> spolovi = (List<Spol>)ViewData["spol"];
 }
-<style>
-    .err {
-        border: 3px solid red;
-        background-color: rgb(255, 122, 122);
-        box-shadow: 0px 0px 10px 2px red;
-    }
-</style>
+<link rel="stylesheet" href="~/css/errorStyle.css" />
+
 <h1>Uredi</h1>
 
 <h4>Pacijent</h4>
@@ -27,19 +22,19 @@
             <input class="form-control" id="ime" name="ime" type="text" value="@p.Ime" />
             <span id="span_ime" class="text-danger"></span>
         </div>
-        
+
         <div class="form-group">
             <label class="control-label">Prezime</label>
             <input class="form-control" id="prezime" name="prezime" type="text" value="@p.Prezime" />
             <span id="span_prezime" class="text-danger"></span>
         </div>
-        
+
         <div class="form-group">
             <label class="control-label">Datum rođenja</label>
             <input class="form-control" id="datum_rodjenja" name="datum_rodjenja" type="datetime" value="@p.DatumRodjenja.Date" />
             <span id="span_datum" class="text-danger"></span>
         </div>
-        
+
         <div class="form-group">
             <label class="control-label">Spol</label>
             <select id="spol" name="spol" class="form-control">
@@ -51,77 +46,20 @@
                 }
             </select>
         </div>
-        
+
         <div class="form-group">
             <label class="control-label">Adresa</label>
             <input class="form-control" id="adresa" name="adresa" type="text" value="@p.Adresa" />
         </div>
-        
+
         <div class="form-group">
             <label class="control-label">Broj telefona</label>
             <input class="form-control" id="telefon" type="tel" name="telefon" value="@p.BrojTelefona" />
         </div>
-        
+
         <button class="btn btn-primary" onclick="test()">Snimi</button>
-        
+
     </div>
 </div>
 
-        <script>
-            function test() {
-                var prvi = drugi = treci = cetvrti = false;
-
-                var id = document.getElementById("id").value;
-                var ime = document.getElementById("ime").value;
-                var prezime = document.getElementById("prezime").value;
-                var datum = document.getElementById("datum_rodjenja").value;
-                var spol = document.getElementById("spol").value;
-                var adresa = document.getElementById("adresa").value;
-                var telefon = document.getElementById("telefon").value;
-
-                if (ime == null || ime == "") {
-                    document.getElementById("ime").classList.add("err");
-                    prvi = false;
-                    document.getElementById("span_ime").innerText = "Obavezno polje";
-                }
-                else {
-                    document.getElementById("ime").classList.remove("err");
-                    prvi = true;
-                    document.getElementById("span_ime").innerText = "";
-                }
-
-                if (prezime == null || prezime == "") {
-                    document.getElementById("prezime").classList.add("err");
-                    drugi = false;
-                    document.getElementById("span_prezime").innerText = "Obavezno polje";
-
-                }
-                else {
-                    document.getElementById("prezime").classList.remove("err");
-                    drugi = true
-                    document.getElementById("span_prezime").innerText = "";
-                }
-
-                if (datum == null || datum == "") {
-                    document.getElementById("datum_rodjenja").classList.add("err");
-                    treci = false;
-                    document.getElementById("span_datum").innerText = "Obavezno polje";
-                }
-                else {
-                    document.getElementById("datum_rodjenja").classList.remove("err");
-                    treci = true;
-                    document.getElementById("span_datum").innerText = "";
-                }
-                if (spol == 0) {
-                    document.getElementById("spol").classList.add("err");
-                    cetvrti = false;
-                }
-                else {
-                    document.getElementById("spol").classList.remove("err");
-                    cetvrti = true;
-                }
-                if (prvi && drugi && treci && cetvrti) {
-                    window.location.href = "/Pacijent/UrediSnimi?id=" + id + "&&ime=" + ime + "&&prezime=" + prezime + "&&datum_rodjenja=" + datum + "&&spol=" + spol + "&&adresa=" + adresa + "&&telefon=" + telefon;
-                }
-            }
-        </script>
+<script src="~/js/Pacijent/Uredi.js"></script>

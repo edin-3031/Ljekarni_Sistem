@@ -1,0 +1,16 @@
+﻿#box {
+    word-wrap: break-word;
+}
+
+#dodaj, #pdf {
+    position: relative;
+    display: inline-block;
+}
+
+#dodaj {
+    left: 45%;
+}
+
+#pdf {
+    float: right;
+}

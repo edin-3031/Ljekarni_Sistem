@@ -6,13 +6,8 @@
     List<Titula> titule = (List<Titula>)ViewData["titule"];
     Ljekar ljekar = (Ljekar)ViewData["ljekar"];
 }
-<style>
-    .err {
-        border: 3px solid red;
-        background-color: rgb(255, 122, 122);
-        box-shadow: 0px 0px 10px 2px red;
-    }
-</style>
+<link rel="stylesheet" href="~/css/errorStyle.css" />
+
 <h1>Uredi</h1>
 
 <h4>Ljekar</h4>
@@ -21,20 +16,20 @@
     <div class="col-md-4">
         <form asp-action="UrediSnimi">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="LjekarID" value="@ljekar.LjekarID"/>
+            <input type="hidden" asp-for="LjekarID" value="@ljekar.LjekarID" />
             <div class="form-group">
                 <label asp-for="Ime" class="control-label"></label>
-                <input onkeydown="enable()" id="ime" asp-for="Ime" class="form-control" value="@ljekar.Ime"/>
+                <input onkeydown="enable()" id="ime" asp-for="Ime" class="form-control" value="@ljekar.Ime" />
                 <span id="span_ime" asp-validation-for="Ime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Prezime" class="control-label"></label>
-                <input onkeydown="enable()" id="prezime" asp-for="Prezime" class="form-control" value="@ljekar.Prezime"/>
+                <input onkeydown="enable()" id="prezime" asp-for="Prezime" class="form-control" value="@ljekar.Prezime" />
                 <span id="span_prezime" asp-validation-for="Prezime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Sifra" class="control-label"></label>
-                <input onkeydown="enable()" id="sifra" asp-for="Sifra" class="form-control" value="@ljekar.Sifra"/>
+                <input onkeydown="enable()" id="sifra" asp-for="Sifra" class="form-control" value="@ljekar.Sifra" />
                 <span id="span_sifra" asp-validation-for="Sifra" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -42,7 +37,7 @@
                 <select onchange="enable()" id="titula" asp-for="titula_FK" class="form-control" asp-items="ViewBag.titula_FK">
                     <option value="@ljekar.titula.TitulaID">@ljekar.titula.Naziv</option>
                     <option disabled="disabled"></option>
-                    @foreach(var x in titule)
+                    @foreach (var x in titule)
                     {
                         <option value="@x.TitulaID">@x.Naziv</option>
                     }
@@ -55,63 +50,4 @@
         </form>
     </div>
 </div>
-<script>
-    var prvi = drugi = treci = cetvrti = false;
-
-    var ime;
-    var prezime;
-    var sifra;
-    var titula;
-
-    function check() {
-        ime = document.getElementById("ime").value;
-        prezime = document.getElementById("prezime").value;
-        sifra = document.getElementById("sifra").value;
-        titula = document.getElementById("titula").value;
-
-        if (ime != "" && ime != null) {
-            prvi = true;
-            document.getElementById("ime").classList.remove("err");
-            document.getElementById("span_ime").innerText = "";
-        }
-        else {
-            prvi = false;
-            document.getElementById("ime").classList.add("err");
-            document.getElementById("span_ime").innerText = "Obavezno polje";
-        }
-        if (prezime != "" && prezime != null) {
-            drugi = true;
-            document.getElementById("prezime").classList.remove("err");
-            document.getElementById("span_prezime").innerText = "";
-        }
-        else {
-            drugi = false;
-            document.getElementById("prezime").classList.add("err");
-            document.getElementById("span_prezime").innerText = "Obavezno polje";
-
-        }
-        if (sifra != "" && sifra != null) {
-            treci = true;
-            document.getElementById("sifra").classList.remove("err");
-            document.getElementById("span_sifra").innerText = "";
-        }
-        else {
-            document.getElementById("sifra").classList.add("err");
-            treci = false;
-            document.getElementById("span_sifra").innerText = "Obavezno polje";
-        }
-        if (titula!=0) {
-            cetvrti = true;
-            document.getElementById("titula").classList.remove("err");
-        }
-        else {
-            cetvrti = false;
-            document.getElementById("titula").classList.add("err");
-        }
-        if(!prvi || !drugi || !treci || !cetvrti)
-            document.getElementById("snimi").disabled = true;
-    }
-    function enable() {
-        document.getElementById("snimi").disabled = false;
-    }
-</script>
+<script src="~/js/Ljekar/Uredi.js"></script>
