@@ -9055,11 +9055,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Ljekarni_Sistem\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\Edin\\Desktop\\Ljekarni_Sistem\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "D:\\Ljekarni_Sistem\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectPath": "C:\\Users\\Edin\\Desktop\\Ljekarni_Sistem\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "packagesPath": "C:\\Users\\Edin\\.nuget\\packages\\",
-      "outputPath": "D:\\Ljekarni_Sistem\\WebApplication1\\WebApplication1\\obj\\",
+      "outputPath": "C:\\Users\\Edin\\Desktop\\Ljekarni_Sistem\\WebApplication1\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

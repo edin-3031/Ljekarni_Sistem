@@ -10,8 +10,17 @@
     </div>
     <form action="/Prijem/Prikaz" method="post">
         <div style="position:relative; left:27%; margin:3%;">
-            <input type="date" name="OD" id="OD" />
-            <input type="date" name="DO" id="DO" />
+            @{ if ((Model.datumOD.Day == 1 && Model.datumOD.Month == 1 && Model.datumOD.Year == 1) || (Model.datumDO.Day == 1 && Model.datumDO.Month == 1 && Model.datumDO.Year == 1))
+                {
+                    <input type="datetime-local" name="OD" id="OD" />
+                    <input type="datetime-local" name="DO" id="DO" />
+                }
+                else
+                {
+                    <input type="datetime-local" name="OD" id="OD" value="@Model.datumOD.ToString("yyyy-MM-ddThh:mm:ss")"/>
+                    <input type="datetime-local" name="DO" id="DO"  value="@Model.datumDO.ToString("yyyy-MM-ddThh:mm:ss")" />
+                } 
+             }
             <button type="submit" class="btn btn-info">Traži</button>
         </div>
     </form>

@@ -19,7 +19,7 @@
             <input type="hidden" asp-for="PrijemID" value="@prijem.PrijemID"/>
             <div class="form-group">
                 <label asp-for="Datum_Vrijeme" class="control-label"></label>
-                <input onchange="enable()" id="datum" type="datetime" value="@prijem.Datum_Vrijeme" asp-for="Datum_Vrijeme" class="form-control" />
+                <input onchange="enable()" id="datum" type="datetime-local" value="@prijem.Datum_Vrijeme.ToString("yyyy-MM-ddThh:mm:ss")" asp-for="Datum_Vrijeme" class="form-control"/>
                 <span id="span_datum" asp-validation-for="Datum_Vrijeme" class="text-danger"></span>
             </div>
             <div class="form-group form-check">

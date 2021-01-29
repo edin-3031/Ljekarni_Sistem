@@ -9,7 +9,7 @@
 <h4>Datum kreiranja: @(Model.datum_reiranja.Day+"."+ Model.datum_reiranja.Month + "." + Model.datum_reiranja.Year + " "+ Model.datum_reiranja.Hour + ":" +Model.datum_reiranja.Minute + " h")</h4>
 <button id="edit" style="position:relative; float:right;">Izmijeni</button>
 <hr />
-@Model.opis
+<textarea style="position:relative; width:100%;">@Model.opis</textarea>
 
 <script>
     $("#hide").click(function () {

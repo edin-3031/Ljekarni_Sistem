@@ -23,17 +23,12 @@
 
         trenutniMjesec++;
 
-        if (trenutnaGodina <= godina) {
-            if (trenutniMjesec <= mjesec) {
-                if (trenutniDan <= dan) {
-                    if (trenutnoSati <= sat) {
-                        if (trenutnoMinuta <= minuta) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
+        if (godina > trenutnaGodina)
+            return true;
+        if (godina == trenutnaGodina && mjesec > trenutniMjesec)
+            return true;
+        if (godina == trenutnaGodina && mjesec == trenutniMjesec && dan>=trenutniDan)
+            return true;
 
         return false;
     }

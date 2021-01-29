@@ -24,11 +24,12 @@ namespace WebApplication1.Controllers
             db = _db;
         }
 
-        public IActionResult Prikaz(DateTime? OD, DateTime? DO)
+        public IActionResult Prikaz(DateTime OD, DateTime DO)
         {
+
             lista_prijemPrikazVM model = new lista_prijemPrikazVM();
 
-            if ((OD == null && DO == null) || OD == null || DO == null)
+            if((OD.Day==1 && OD.Month==1 && OD.Year == 1)|| (DO.Day == 1 && DO.Month == 1 && DO.Year == 1))
             {
                 List<prijemPrikazVM> prijemi = db.Prijem.Include(a => a.ljekar).Include(a => a.pacijent).AsQueryable().Select(x => new prijemPrikazVM
                 {
@@ -43,7 +44,7 @@ namespace WebApplication1.Controllers
             }
             else
             {
-                List<prijemPrikazVM> prijemi = db.Prijem.Include(a => a.ljekar).Include(a => a.pacijent).AsQueryable().Where(a=>a.Datum_Vrijeme.Date>=OD.Value && a.Datum_Vrijeme.Date<=DO.Value).Select(x => new prijemPrikazVM
+                List<prijemPrikazVM> prijemi = db.Prijem.Include(a => a.ljekar).Include(a => a.pacijent).AsQueryable().Where(a=>a.Datum_Vrijeme.Date>=OD.Date && a.Datum_Vrijeme.Date<=DO.Date).Select(x => new prijemPrikazVM
                 {
                     Datum_Vrijeme = x.Datum_Vrijeme,
                     Hitni_Prijem = x.Hitni_Prijem,
@@ -53,6 +54,8 @@ namespace WebApplication1.Controllers
                 }).ToList();
 
                 model.lista = prijemi.OrderBy(a => a.Datum_Vrijeme.Date).ToList();
+                model.datumDO = DO;
+                model.datumOD = OD;
             }
             return View(model);
         }

@@ -18,5 +18,7 @@ namespace WebApplication1.Models.VM
     public class lista_prijemPrikazVM
     {
         public List<prijemPrikazVM> lista { get; set; }
+        public DateTime datumOD { get; set; }
+        public DateTime datumDO { get; set; }
     }
 }
